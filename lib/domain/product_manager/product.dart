@@ -7,5 +7,3 @@ class Product {
     required this.description,
   });
 }
-
-Comparator<Product> productComparator = (a, b) => a.title!.compareTo(b.title!);

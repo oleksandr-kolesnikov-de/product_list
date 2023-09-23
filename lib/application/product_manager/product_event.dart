@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:product_list/domain/product_manager/product.dart';
 
 abstract class ProductPageEvent extends Equatable {
 
@@ -18,9 +19,11 @@ class SearchProductsEvent extends ProductPageEvent {
 }
 
 class SortAscProductsEvent extends ProductPageEvent {
-  const SortAscProductsEvent() : super();
+  final List<Product> shownList;
+  const SortAscProductsEvent(this.shownList) : super();
 }
 
 class SortDescProductsEvent extends ProductPageEvent {
-  const SortDescProductsEvent() : super();
+  final List<Product> shownList;
+  const SortDescProductsEvent(this.shownList) : super();
 }

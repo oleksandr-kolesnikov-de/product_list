@@ -42,19 +42,34 @@ class HomePage extends StatelessWidget {
                           .add(SearchProductsEvent(v));
                     },
                   )),
-                  IconButton(onPressed: () {
-                    context
-                        .read<ProductPageBloc>()
-                        .add(const SortAscProductsEvent());
-                  }, icon: const Icon(Icons.sort))
+                  IconButton(
+                      onPressed: () {
+                        (state.sortType == SortType.asc)
+                            ? context
+                            .read<ProductPageBloc>()
+                            .add(SortDescProductsEvent(state.shownList))
+                            : (state.sortType == SortType.desc)
+                            ? context
+                            .read<ProductPageBloc>()
+                            .add(SortAscProductsEvent(state.shownList))
+                            : context
+                            .read<ProductPageBloc>()
+                            .add(SortAscProductsEvent(state.shownList));
+
+                      },
+                      icon: (state.sortType == SortType.asc)
+                          ? const Icon(Icons.arrow_downward)
+                          : (state.sortType == SortType.desc)
+                              ? const Icon(Icons.arrow_upward)
+                              : const Icon(Icons.sort))
                 ],
               ),
             ),
             (state is ProductPageProcessingState)
                 ? const Padding(
-                  padding: EdgeInsets.only(top:100, left: 30, right: 30),
-                  child: LinearProgressIndicator(),
-                )
+                    padding: EdgeInsets.only(top: 100, left: 30, right: 30),
+                    child: LinearProgressIndicator(),
+                  )
                 : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

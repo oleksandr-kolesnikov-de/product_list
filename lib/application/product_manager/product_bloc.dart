@@ -19,36 +19,35 @@ class ProductPageBloc extends Bloc<ProductPageEvent, ProductPageState> {
       this.sortAscProducts, this.sortDescProducts)
       : super(ProductPageInitialState.emptyState()) {
     on<GenerateFakeProductsEvent>((event, emit) async {
-      emit(ProductPageLoadingState(const [], const []));
+      emit(
+          ProductPageLoadingState(state.list, state.shownList, state.sortType));
       List<Product> newList = await generateFakeProducts(NoParams());
       List<Product> newShownList = newList;
-      emit(ProductPageLoadedState(newList, newShownList));
+      emit(ProductPageLoadedState(newList, newShownList, state.sortType));
     });
 
     on<SearchProductsEvent>((event, emit) async {
-      ProductPageState baseState = state;
-
-      emit(ProductPageProcessingState(const [], const []));
-
-      List<Product> newShownList =
-          await searchProducts(SearchProductsParams(event.pattern, baseState.list));
-      emit(ProductPageLoadedState(baseState.list, newShownList));
+      emit(ProductPageProcessingState(
+          state.list, state.shownList, state.sortType));
+      List<Product> newShownList = await searchProducts(SearchProductsParams(
+          event.pattern, state.list));
+      emit(ProductPageLoadedState(state.list, newShownList, SortType.no));
     });
 
     on<SortAscProductsEvent>((event, emit) async {
-      ProductPageState baseState = state;
-      emit(ProductPageProcessingState(const [], const []));
+      emit(ProductPageProcessingState(
+          state.list, state.shownList, state.sortType));
       List<Product> newShownList =
-      await sortAscProducts(SortAscProductsParams(baseState.list));
-      emit(ProductPageLoadedState(baseState.list, newShownList));
+          await sortAscProducts(SortAscProductsParams(state.shownList));
+      emit(ProductPageLoadedState(state.list, newShownList, SortType.asc));
     });
 
     on<SortDescProductsEvent>((event, emit) async {
-      ProductPageState baseState = state;
-      emit(ProductPageProcessingState(const [], const []));
+      emit(ProductPageProcessingState(
+          state.list, state.shownList, state.sortType));
       List<Product> newShownList =
-      await sortDescProducts(SortDescProductsParams(baseState.list));
-      emit(ProductPageLoadedState(baseState.list, newShownList));
+          await sortDescProducts(SortDescProductsParams(state.shownList));
+      emit(ProductPageLoadedState(state.list, newShownList, SortType.desc));
     });
   }
 }
