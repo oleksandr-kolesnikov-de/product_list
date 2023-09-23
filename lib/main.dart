@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:product_list/application/product_event.dart';
-import 'package:product_list/presentation/home_page.dart';
+import 'package:product_list/application/product_manager/product_event.dart';
+import 'package:product_list/presentation/product_manager/home_page.dart';
 
-import 'application/product_bloc.dart';
+import 'application/product_manager/product_bloc.dart';
 import 'injection_container.dart';
 
 void main() async {
