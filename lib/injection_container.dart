@@ -9,6 +9,7 @@ final core = GetIt.instance;
 Future configureCore() async => await init();
 
 Future<void> init() async {
-  core.registerFactory(() => ProductPageBloc(core()));
+
   core.registerLazySingleton<IRepository>(() => Repository());
+  core.registerFactory(() => ProductPageBloc(core()));
 }

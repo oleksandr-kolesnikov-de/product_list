@@ -1,20 +1,19 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ProductPageState extends Equatable {
+import '../domain/product.dart';
 
-  const ProductPageState();
+abstract class ProductPageState extends Equatable {
+  List<Product> list;
+  ProductPageState(this.list);
 
   @override
-  List<Object> get props => [
-
-  ];
+  List<Object> get props => [list];
 }
 
 class ProductPageInitialState extends ProductPageState {
-  const ProductPageInitialState();
-
+  ProductPageInitialState(super.list);
 
   factory ProductPageInitialState.emptyState() {
-    return const ProductPageInitialState();
+    return ProductPageInitialState(const []);
   }
 }

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_list/application/product_event.dart';
 import 'package:product_list/presentation/home_page.dart';
 
 import 'application/product_bloc.dart';
 import 'injection_container.dart';
 
 void main() async {
+
   await configureCore();
-  runApp(const MyApp());
+  runApp(const ProductListApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ProductListApp extends StatelessWidget {
+  const ProductListApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductPageBloc>(
-          create: (BuildContext context) => core<ProductPageBloc>(),
+          create: (BuildContext context) =>
+              core<ProductPageBloc>()..add(const GenerateFakeProductsEvent()),
         )
       ],
       child: MaterialApp(
@@ -28,8 +31,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const HomePage(title: 'Flutter Demo Home Page'),
+        home: const HomePage(),
+
       ),
+
     );
   }
 }
