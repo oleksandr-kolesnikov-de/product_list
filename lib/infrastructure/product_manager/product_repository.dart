@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:product_list/domain/product_manager/i_repository.dart';
-import 'package:product_list/domain/product_manager/product.dart';
+import 'package:product_list/domain/product_manager/repository/i_product_repository.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
 
-class Repository implements IRepository {
-  Repository();
+class ProductRepository implements IProductRepository {
+  ProductRepository();
 
   final _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   final Random _rnd = Random();

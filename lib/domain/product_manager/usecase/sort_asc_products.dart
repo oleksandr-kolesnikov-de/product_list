@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:product_list/domain/core/use_case.dart';
 import 'package:product_list/domain/core/utils.dart';
-import 'package:product_list/domain/product_manager/product.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
 
 class SortAscProducts extends UseCase<Future<List<Product>>, SortAscProductsParams> {
   SortAscProducts();

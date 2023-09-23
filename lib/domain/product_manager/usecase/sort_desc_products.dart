@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:product_list/domain/core/use_case.dart';
-import 'package:product_list/domain/product_manager/product.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
 import 'package:product_list/domain/core/utils.dart';
 
 class SortDescProducts extends UseCase<Future<List<Product>>, SortDescProductsParams> {

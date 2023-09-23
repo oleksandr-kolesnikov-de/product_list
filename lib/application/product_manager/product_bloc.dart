@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_list/application/product_manager/product_event.dart';
 import 'package:product_list/domain/core/use_case.dart';
-import 'package:product_list/domain/product_manager/generate_fake_products.dart';
-import 'package:product_list/domain/product_manager/product.dart';
-import 'package:product_list/domain/product_manager/search_products.dart';
-import 'package:product_list/domain/product_manager/sort_asc_products.dart';
-import 'package:product_list/domain/product_manager/sort_desc_products.dart';
+import 'package:product_list/domain/product_manager/usecase/generate_fake_products.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
+import 'package:product_list/domain/product_manager/usecase/search_products.dart';
+import 'package:product_list/domain/product_manager/usecase/sort_asc_products.dart';
+import 'package:product_list/domain/product_manager/usecase/sort_desc_products.dart';
 
 import 'product_state.dart';
 

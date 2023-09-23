@@ -1,40 +1,40 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/product_manager/product.dart';
+import '../../domain/product_manager/entity/product.dart';
 
 enum SortType { no, asc, desc }
 
 abstract class ProductPageState extends Equatable {
-  List<Product> list;
-  List<Product> shownList;
-  SortType sortType;
+  final List<Product> list;
+  final List<Product> shownList;
+  final SortType sortType;
 
-  ProductPageState(this.list, this.shownList, this.sortType);
+  const ProductPageState(this.list, this.shownList, this.sortType);
 
   @override
   List<Object> get props => [list, shownList, sortType];
 }
 
 class ProductPageInitialState extends ProductPageState {
-  ProductPageInitialState(super.list, super.shownList, super.sortType);
+  const ProductPageInitialState(super.list, super.shownList, super.sortType);
 
   factory ProductPageInitialState.emptyState() {
-    return ProductPageInitialState(const [], const [], SortType.no);
+    return const ProductPageInitialState([], [], SortType.no);
   }
 }
 
 class ProductPageLoadingState extends ProductPageState {
-  ProductPageLoadingState(super.list, super.shownList, super.sortType);
+  const ProductPageLoadingState(super.list, super.shownList, super.sortType);
 }
 
 class ProductPageProcessingState extends ProductPageState {
-  ProductPageProcessingState(super.list, super.shownList, super.sortType);
+  const ProductPageProcessingState(super.list, super.shownList, super.sortType);
 }
 
 class ProductPageLoadedState extends ProductPageState {
-  ProductPageLoadedState(super.list, super.shownList, super.sortType);
+  const ProductPageLoadedState(super.list, super.shownList, super.sortType);
 }
 
 class ProductPageErrorState extends ProductPageState {
-  ProductPageErrorState(super.list, super.shownList, super.sortType);
+  const ProductPageErrorState(super.list, super.shownList, super.sortType);
 }

@@ -1,10 +1,10 @@
 import 'package:product_list/domain/core/use_case.dart';
-import 'package:product_list/domain/product_manager/product.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
 
-import 'i_repository.dart';
+import '../repository/i_product_repository.dart';
 
 class GenerateFakeProducts extends UseCase<Future<List<Product>>, NoParams> {
-  final IRepository repository;
+  final IProductRepository repository;
 
   GenerateFakeProducts(this.repository);
 

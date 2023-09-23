@@ -4,8 +4,8 @@ import 'package:product_list/application/product_manager/product_bloc.dart';
 import 'package:product_list/application/product_manager/product_event.dart';
 import 'package:product_list/application/product_manager/product_state.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class ProductManagerScreen extends StatelessWidget {
+  const ProductManagerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +43,27 @@ class HomePage extends StatelessWidget {
                     },
                   )),
                   IconButton(
-                      onPressed: () {
-                        (state.sortType == SortType.asc)
-                            ? context
-                            .read<ProductPageBloc>()
-                            .add(SortDescProductsEvent(state.shownList))
-                            : (state.sortType == SortType.desc)
-                            ? context
-                            .read<ProductPageBloc>()
-                            .add(SortAscProductsEvent(state.shownList))
-                            : context
-                            .read<ProductPageBloc>()
-                            .add(SortAscProductsEvent(state.shownList));
-
-                      },
-                      icon: (state.sortType == SortType.asc)
-                          ? const Icon(Icons.arrow_downward)
-                          : (state.sortType == SortType.desc)
-                              ? const Icon(Icons.arrow_upward)
-                              : const Icon(Icons.sort))
+                    onPressed: () {
+                      (state.sortType == SortType.asc)
+                          ? context
+                              .read<ProductPageBloc>()
+                              .add(SortDescProductsEvent(state.shownList))
+                          : context
+                              .read<ProductPageBloc>()
+                              .add(SortAscProductsEvent(state.shownList));
+                    },
+                    icon: const Icon(Icons.sort_by_alpha),
+                  ),
+                  (state.sortType == SortType.no)
+                      ? const Icon(Icons.sort, size: 12, color: Colors.grey)
+                      : (state.sortType == SortType.asc)
+                          ? const Icon(
+                              Icons.arrow_upward,
+                              size: 12,
+                              color: Colors.red,
+                            )
+                          : const Icon(Icons.arrow_downward,
+                              size: 12, color: Colors.red),
                 ],
               ),
             ),

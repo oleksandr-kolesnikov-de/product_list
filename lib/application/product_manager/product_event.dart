@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:product_list/domain/product_manager/product.dart';
+import 'package:product_list/domain/product_manager/entity/product.dart';
 
 abstract class ProductPageEvent extends Equatable {
 
