@@ -37,9 +37,15 @@ class ProductPageBloc extends Bloc<ProductPageEvent, ProductPageState> {
     on<SearchProductsEvent>((event, emit) async {
       emit(ProductPageProcessingState(
           state.list, state.shownList, state.sortType));
-      List<Product> newShownList =
-          await searchProducts(SearchProductsParams(event.pattern, state.list));
-      emit(ProductPageLoadedState(state.list, newShownList, SortType.no));
+      if (event.pattern == "#") {
+        // just to show ErrorScreen functionality
+        emit(
+            ProductPageErrorState(state.list, state.shownList, state.sortType));
+      } else {
+        List<Product> newShownList = await searchProducts(
+            SearchProductsParams(event.pattern, state.list));
+        emit(ProductPageLoadedState(state.list, newShownList, SortType.no));
+      }
     });
 
     on<SortAscProductsEvent>((event, emit) async {

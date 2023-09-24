@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_list/application/product_manager/product_bloc.dart';
 import 'package:product_list/application/product_manager/product_event.dart';
 import 'package:product_list/application/product_manager/product_state.dart';
+import 'package:product_list/presentation/error_screen/error_screen.dart';
 
 class ProductManagerScreen extends StatelessWidget {
   const ProductManagerScreen({super.key});
@@ -22,6 +23,9 @@ class ProductManagerScreen extends StatelessWidget {
         if (state is ProductPageLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }
+        if (state is ProductPageErrorState) {
+          return const ErrorScreen();
+        }
         return ListView(
           children: [
             Padding(
@@ -31,6 +35,7 @@ class ProductManagerScreen extends StatelessWidget {
                 children: [
                   Expanded(
                       child: TextFormField(
+                    key: const Key("SearchBox"),
                     decoration: const InputDecoration(
                       labelText: 'Search',
                       prefixIcon:
@@ -43,6 +48,7 @@ class ProductManagerScreen extends StatelessWidget {
                     },
                   )),
                   IconButton(
+                    key: const Key("SortButton"),
                     onPressed: () {
                       (state.sortType == SortType.asc)
                           ? context
@@ -79,8 +85,10 @@ class ProductManagerScreen extends StatelessWidget {
                     itemCount: state.shownList.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        key: const Key("ListTile"),
                         title: Text(state.shownList[index].title ?? ""),
-                        subtitle: Text(state.shownList[index].description ?? ""),
+                        subtitle:
+                            Text(state.shownList[index].description ?? ""),
                       );
                     },
                   ),
