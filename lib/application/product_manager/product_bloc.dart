@@ -21,16 +21,24 @@ class ProductPageBloc extends Bloc<ProductPageEvent, ProductPageState> {
     on<GenerateFakeProductsEvent>((event, emit) async {
       emit(
           ProductPageLoadingState(state.list, state.shownList, state.sortType));
-      List<Product> newList = await generateFakeProducts(NoParams());
-      List<Product> newShownList = newList;
-      emit(ProductPageLoadedState(newList, newShownList, state.sortType));
+      // just to extend the exercise
+      // some error processing
+      final eitherResult = await generateFakeProducts(NoParams());
+      eitherResult.fold((l) {
+        List<Product> newList = l;
+        List<Product> newShownList = newList;
+        emit(ProductPageLoadedState(newList, newShownList, state.sortType));
+      }, (r) {
+        emit(
+            ProductPageErrorState(state.list, state.shownList, state.sortType));
+      });
     });
 
     on<SearchProductsEvent>((event, emit) async {
       emit(ProductPageProcessingState(
           state.list, state.shownList, state.sortType));
-      List<Product> newShownList = await searchProducts(SearchProductsParams(
-          event.pattern, state.list));
+      List<Product> newShownList =
+          await searchProducts(SearchProductsParams(event.pattern, state.list));
       emit(ProductPageLoadedState(state.list, newShownList, SortType.no));
     });
 

@@ -10,12 +10,14 @@ class SearchProducts
   Future<List<Product>> call(SearchProductsParams params) async {
     await Future.delayed(const Duration(milliseconds: 500));
     List<Product> filteredProducts = params.list.where((product) {
-      return product.title
-              .toLowerCase()
-              .startsWith(params.pattern.toLowerCase()) ||
-          product.description
-              .toLowerCase()
-              .startsWith(params.pattern.toLowerCase());
+      return (product.title
+                  ?.toLowerCase()
+                  .startsWith(params.pattern.toLowerCase()) ??
+              false) ||
+          (product.description
+                  ?.toLowerCase()
+                  .startsWith(params.pattern.toLowerCase()) ??
+              false);
     }).toList();
     return filteredProducts;
   }

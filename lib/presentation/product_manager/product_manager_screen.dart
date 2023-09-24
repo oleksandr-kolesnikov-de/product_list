@@ -79,8 +79,8 @@ class ProductManagerScreen extends StatelessWidget {
                     itemCount: state.shownList.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(state.shownList[index].title),
-                        subtitle: Text(state.shownList[index].description),
+                        title: Text(state.shownList[index].title ?? ""),
+                        subtitle: Text(state.shownList[index].description ?? ""),
                       );
                     },
                   ),
