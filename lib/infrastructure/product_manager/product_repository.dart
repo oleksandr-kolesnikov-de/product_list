@@ -4,15 +4,18 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:product_list/domain/product_manager/repository/i_product_repository.dart';
 import 'package:product_list/domain/product_manager/entity/product.dart';
+import 'package:welltested_annotation/welltested_annotation.dart';
 
+@Welltested()
 class ProductRepository implements IProductRepository {
   ProductRepository();
 
-  final _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
   final Random _rnd = Random();
 
-  String getRandomString(int length) => String.fromCharCodes(
-      Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => chars.codeUnitAt(_rnd.nextInt(chars.length))));
 
   @override
   Future<Either<List<Product>, Exception>> generateFakeProducts() async {
@@ -34,17 +37,15 @@ class ProductRepository implements IProductRepository {
       // that can generate errors, processed by catch block
       return Left(List.generate(
         20,
-            (index) =>
-            Product(
-              // title: 'Product ${characters[index % characters.length]}$index',
-              // description: 'Description $index',
-              title: getRandomString(10),
-              description: getRandomString(15),
-            ),
+        (index) => Product(
+          // title: 'Product ${characters[index % characters.length]}$index',
+          // description: 'Description $index',
+          title: getRandomString(10),
+          description: getRandomString(15),
+        ),
       ));
     } catch (e) {
       return Right(Exception());
     }
   }
 }
-
